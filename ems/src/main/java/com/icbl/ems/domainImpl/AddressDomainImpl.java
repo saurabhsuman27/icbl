@@ -1,5 +1,7 @@
 package com.icbl.ems.domainImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,13 @@ public class AddressDomainImpl implements AddressDomain {
 		addressRepo.save(address);
 		ResponseMessage response = new ResponseMessage("200", "Address added successfully");
 		return response;
+	}
+
+	@Override
+	public List<AddressModel> getAddress() throws EmployeeException {
+		List<Address> addressList = addressRepo.findAll();
+		List<AddressModel> addressModelList = null;
+		return addressModelList;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.icbl.ems.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,12 @@ public class AddressSevriceImpl implements AddressService {
 	public ResponseMessage addAddress(AddressModel addressModel) throws EmployeeException {
 		ResponseMessage response = addressDomain.addAddress(addressModel);
 		return response;
+	}
+
+	@Override
+	public List<AddressModel> getAddress() throws EmployeeException {
+		List<AddressModel> addressList = addressDomain.getAddress();
+		return addressList;
 	}
 
 }

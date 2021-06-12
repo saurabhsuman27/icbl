@@ -27,7 +27,8 @@ public class AddressController {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public List<AddressModel> getAdresses() {
-		return null;
+	public List<AddressModel> getAdresses() throws EmployeeException {
+		List<AddressModel> addressModelList = addressService.getAddress();
+		return addressModelList;
 	}
 }

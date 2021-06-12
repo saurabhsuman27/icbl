@@ -1,5 +1,7 @@
 package com.icbl.ems.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +24,11 @@ public class EmployeeController {
 	public ResponseMessage addEmployee(@RequestBody EmployeeModel employeeModel) throws EmployeeException {
 		ResponseMessage response = empService.addEmployee(employeeModel);
 		return response;
+	}
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public List<EmployeeModel> findAllEmployee() throws EmployeeException {
+		List<EmployeeModel> empList = empService.findAllEmployee();
+		return empList;
 	}
 }

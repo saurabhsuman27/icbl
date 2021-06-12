@@ -42,4 +42,13 @@ public class Address {
 	@Column(name = "zip_code", nullable = false)
 	private String zipCode;
 	
+	/*
+	 * @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL) private
+	 * List<Empoyee> employees;
+	 * 
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "employee_id") private Employee employee;
+	 */
+	
 }
