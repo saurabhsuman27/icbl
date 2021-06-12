@@ -1,5 +1,7 @@
 package com.icbl.ems.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +24,10 @@ public class AddressController {
 	public ResponseMessage addAddress(@RequestBody AddressModel addressModel) throws EmployeeException {
 		ResponseMessage response = addressService.addAddress(addressModel);
 		return response;
+	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public List<AddressModel> getAdresses() {
+		return null;
 	}
 }
