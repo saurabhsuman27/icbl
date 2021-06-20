@@ -12,10 +12,18 @@ import lombok.NoArgsConstructor;
 public class EmployeeModel {
 
 	private UUID id;
-	
+
+	private String employeeId;
+
 	private String firstName;
-	
+
 	private String lastName;
-	
-	private String department;	
+
+	private CompanyModel company;
+
+	private DepartmentModel department;
+
+	private AddressModel address;
+
+	private BranchModel branch;
 }

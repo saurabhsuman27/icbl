@@ -1,6 +1,7 @@
 package com.icbl.ems.entities;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -12,36 +13,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Table(name = "employee")
 @Entity
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Employee {
+@Table(name = "department")
+public class Department {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
-	@Column(name = "employee_id", unique = true, nullable = false)
-	private String employeeId;
+	@Column(name = "code", unique = true, nullable = false)
+	private String code;
 
-	@Column(name = "first_name", nullable = false)
-	private String firstName;
-
-	@Column(name = "last_name", nullable = true)
-	private String lastName;
+	@Column(name = "name", unique = true, nullable = false)
+	private String name;
 
 	@Column(name = "added_by", nullable = false)
 	private String addedBy;
@@ -57,15 +46,10 @@ public class Employee {
 	@Column(name = "updated_on", nullable = false)
 	private Date updatedOn;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "department_id")
-	private Department department;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id")
-	private Address address;
-
-	@OneToOne
-	@JoinColumn(name = "branch_id")
-	private Branch branch;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "comapny_id")
+	private Company company;
+	
+	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Employee> employees;
 }

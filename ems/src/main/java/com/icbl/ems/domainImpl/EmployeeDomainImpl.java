@@ -11,7 +11,7 @@ import com.icbl.ems.exceptions.EmployeeException;
 import com.icbl.ems.models.EmployeeModel;
 import com.icbl.ems.repositories.EmployeeRepository;
 import com.icbl.ems.response.ResponseMessage;
-import com.icbl.ems.utilities.EmployeeUtility;
+import com.icbl.ems.utilities.CommonUtility;
 
 @Component
 public class EmployeeDomainImpl implements EmployeeDomain {
@@ -19,13 +19,10 @@ public class EmployeeDomainImpl implements EmployeeDomain {
 	@Autowired
 	private EmployeeRepository empRepo;
 
-	@Autowired
-	private EmployeeUtility empUtils;
-
 	@Override
 	public ResponseMessage addEmploye(EmployeeModel employeeModel) throws EmployeeException {
 
-		Employee emp = empUtils.modelToEntity(employeeModel);
+		Employee emp = CommonUtility.map(employeeModel, Employee.class);
 		empRepo.save(emp);
 		return new ResponseMessage("200", "Employee addedd successfully");
 	}
@@ -33,8 +30,7 @@ public class EmployeeDomainImpl implements EmployeeDomain {
 	@Override
 	public List<EmployeeModel> findAllEmployee() throws EmployeeException {
 		List<Employee> empList = empRepo.findAll();
-		List<EmployeeModel> empModelList = empUtils.entityListToModelList(empList);
-		return empModelList;
+		return null;
 	}
 
 }

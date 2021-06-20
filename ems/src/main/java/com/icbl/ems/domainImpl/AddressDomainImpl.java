@@ -11,7 +11,7 @@ import com.icbl.ems.exceptions.EmployeeException;
 import com.icbl.ems.models.AddressModel;
 import com.icbl.ems.repositories.AddressRepository;
 import com.icbl.ems.response.ResponseMessage;
-import com.icbl.ems.utilities.AddressUtility;
+import com.icbl.ems.utilities.CommonUtility;
 
 @Component
 public class AddressDomainImpl implements AddressDomain {
@@ -19,12 +19,9 @@ public class AddressDomainImpl implements AddressDomain {
 	@Autowired
 	private AddressRepository addressRepo;
 
-	@Autowired
-	private AddressUtility addressUtils;
-
 	@Override
 	public ResponseMessage addAddress(AddressModel addressModel) throws EmployeeException {
-		Address address = addressUtils.ModelToEntity(addressModel);
+		Address address = CommonUtility.map(addressModel, Address.class);
 		addressRepo.save(address);
 		ResponseMessage response = new ResponseMessage("200", "Address added successfully");
 		return response;
@@ -33,7 +30,7 @@ public class AddressDomainImpl implements AddressDomain {
 	@Override
 	public List<AddressModel> getAddress() throws EmployeeException {
 		List<Address> addressList = addressRepo.findAll();
-		List<AddressModel> addressModelList = null;
+		List<AddressModel> addressModelList = CommonUtility.mapAll(addressList, AddressModel.class);
 		return addressModelList;
 	}
 
